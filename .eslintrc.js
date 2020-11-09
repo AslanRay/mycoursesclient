@@ -1,7 +1,7 @@
 module.exports = {
   env: {
+    browser: true,
     es2021: true,
-    node: true,
   },
   extends: [
     'plugin:react/recommended',
@@ -19,8 +19,8 @@ module.exports = {
     'react-hooks',
   ],
   rules: {
-    'react/jsx-filename-extension': [0],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'react/jsx-filename-extension': 0,
   },
 };
