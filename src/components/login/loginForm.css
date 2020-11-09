@@ -1,0 +1,25 @@
+.Login-container {
+  display: flex;
+  background-color: #3135A8;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.Input-container {
+  width: 20vw;
+  height: 5vh;
+  margin-bottom: 2vh;
+  border-radius: 0.5vw;
+  color: #282828;
+}
+
+.Button-container {
+  width: 20.8vw;
+  height: 5vh;
+  background-color: #AECFEF;
+  border-radius: 0.5vw;
+  color: #282828;
+}
