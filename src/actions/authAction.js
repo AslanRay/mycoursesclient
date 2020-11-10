@@ -1,4 +1,4 @@
-import { apiCall } from '../utils/utilFunctions';
+import { apiCall, setSessionStorage } from '../utils/utilFunctions';
 
 export const LOGIN = 'LOGIN';
 
@@ -7,15 +7,17 @@ export const login = (email, password) => {
 
   return async (dispatch) => {
     try {
-      const response = await apiCall('login', {
-        post: body,
-        login,
-      });
+      const response = await apiCall('login', { post: body });
       const data = await response.json();
-      console.log('data', data);
+      const { token, user } = data.data;
+      dispatch({
+        type: LOGIN,
+        token,
+        userName: user.name,
+      });
+      setSessionStorage({ data: token, key: 'sessionToken' });
     } catch (_) {
       //
     }
-    dispatch({ type: LOGIN, token: 'somehting' });
   };
 };

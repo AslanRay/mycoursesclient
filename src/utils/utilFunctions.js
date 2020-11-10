@@ -40,7 +40,7 @@ export function genApiUrl(path, params) {
 export async function apiCall(path, params = {}) {
   const url = genApiUrl(path, params.get);
 
-  const token = 'asdsdasd';
+  const token = getSessionStorage('sessionToken');
 
   const options = {
     headers: {
@@ -50,24 +50,18 @@ export async function apiCall(path, params = {}) {
     },
   };
 
-  const loginOptions = {};
-
   if (params.post) {
     options.method = 'POST';
     options.body = JSON.stringify(params.post);
   } else if (params.delete) {
     options.method = 'DELETE';
     options.body = JSON.stringify(params.delete);
-  } else if (params.post && params.login) {
-    console.log('entro al login');
-    loginOptions.method = 'POST';
-    loginOptions.body = JSON.stringify(params.post);
   } else if (params.patch) {
     options.method = 'PATCH';
     options.body = JSON.stringify(params.patch);
   }
 
-  const response = await fetch(url, params.login ? loginOptions : options);
+  const response = await fetch(url, options);
 
   return response;
 }
