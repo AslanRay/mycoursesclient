@@ -1,8 +1,10 @@
-import { LOGIN } from '../actions/authAction';
+import { LOGIN, LOGOUT } from '../actions/authAction';
 
 const initialState = {
   token: '',
   userName: '',
+  isLoged: false,
+  userID: '',
 };
 
 const authReducer = (state = initialState, action) => {
@@ -12,6 +14,17 @@ const authReducer = (state = initialState, action) => {
         ...state,
         token: action.token,
         userName: action.userName,
+        isLoged: true,
+        userID: action.userID,
+      };
+    }
+    case LOGOUT: {
+      return {
+        ...state,
+        token: action.token,
+        userName: action.userName,
+        isLoged: false,
+        userID: action.userID,
       };
     }
     default: return { ...state };

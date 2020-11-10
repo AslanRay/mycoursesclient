@@ -1,0 +1,32 @@
+.MyCourses-container {
+  display: flex;
+  background-color: #4D85E4;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.MyCourses-title-row {
+  display: flex;
+  background-color: #3135A8;
+  width: 100vw;
+  height: 20vh;
+  margin-top: 10vh;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.MyCourses-title {
+  margin-left: 5vw;
+  color: #F3F4F3;
+}
+
+.MyCourses-logout-button {
+  background-image: url('../../assets/logout.svg');
+  width: 5vw;
+  height: 10vh;
+  background-repeat: no-repeat;
+  margin-right: 2vw;
+  cursor: pointer;
+}

@@ -1,6 +1,7 @@
-import { apiCall, setSessionStorage } from '../utils/utilFunctions';
+import { apiCall, setSessionStorage, removeSessionStorage } from '../utils/utilFunctions';
 
 export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
 
 export const login = (email, password) => {
   const body = { email, password };
@@ -14,6 +15,7 @@ export const login = (email, password) => {
         type: LOGIN,
         token,
         userName: user.name,
+        userID: user.id,
       });
       setSessionStorage({ data: token, key: 'sessionToken' });
     } catch (_) {
@@ -21,3 +23,13 @@ export const login = (email, password) => {
     }
   };
 };
+
+export const logout = () => (dispatch) => {
+    removeSessionStorage('sessionToken');
+    dispatch({
+      type: LOGOUT,
+      token: '',
+      userName: '',
+      userID: '',
+    });
+  };
