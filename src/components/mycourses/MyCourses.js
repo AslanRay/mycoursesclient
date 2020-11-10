@@ -27,6 +27,8 @@ const MyCourses = () => {
     history.push('/');
   };
 
+  const handleTrackedCourseClick = (userCourseTracked) => { console.log('Clicked', userCourseTracked); };
+
   return (
     <div className="MyCourses-container">
       <div className="MyCourses-title-row">
@@ -50,6 +52,7 @@ const MyCourses = () => {
             courseName={userCourseTracked.courseName}
             courseType={userCourseTracked.courseType}
             loggedTime={userCourseTracked.loggedTime}
+            onClick={() => handleTrackedCourseClick(userCourseTracked)}
           />
         ))}
       </div>
