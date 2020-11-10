@@ -30,3 +30,11 @@
   margin-right: 2vw;
   cursor: pointer;
 }
+
+.MyCourses-tracked-courses-list {
+  width: 100vw;
+  background-color: #AECFEF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

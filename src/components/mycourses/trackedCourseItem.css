@@ -1,0 +1,15 @@
+.TCI_container {
+  display:flex;
+  flex-direction: column;
+  width: 40vw;
+  border-radius: 1vw;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 1);
+  cursor: pointer;
+  padding: 1vw;
+  margin: 1vw;
+}
+
+.TCI_item {
+  color: #282828;
+  margin-bottom: 1vh;
+}
