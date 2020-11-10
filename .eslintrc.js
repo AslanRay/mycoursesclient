@@ -22,5 +22,8 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-filename-extension': 0,
+    indent: 'off',
+    'template-curly-spacing': 'off',
+    'react/prop-types': 0,
   },
 };
