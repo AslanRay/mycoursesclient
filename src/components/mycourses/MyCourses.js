@@ -14,6 +14,10 @@ const MyCourses = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState('');
   const [time, setTime] = useState('');
+  const [selectedCourseOption, setSelectedCourseOption] = useState(null);
+  const [selectedCourseTypeOption, setSelectedCourseTypeOption] = useState(null);
+  // const [courseOptions, setCourseOptions] = useState([]);
+  // const [courseTypeOptions, setCourseTypeOptions] = useState([]);
 
   const userName = useSelector((state) => state.authReducer.userName);
   // const userId = useSelector((state) => state.authReducer.userID);
@@ -40,6 +44,16 @@ const MyCourses = () => {
 
   console.log('usersCoursesTracked', { usersCoursesTracked, coursesList, courseTypesList });
 
+  const temporalCourseOptions = coursesList.map((d) => ({
+    value: d.name,
+    label: d.name,
+  }));
+
+  const temporalCourseTypeOptions = courseTypesList.map((d) => ({
+    value: d.name,
+    label: d.name,
+  }));
+
   const logout = () => {
     dispatch(signout());
     history.push('/');
@@ -53,6 +67,14 @@ const MyCourses = () => {
     console.log('Clicked', userCourseTracked);
     setName(userCourseTracked.userName);
     setTime(userCourseTracked.loggedTime);
+    setSelectedCourseOption({
+      value: userCourseTracked.courseName,
+      label: userCourseTracked.courseName,
+    });
+    setSelectedCourseTypeOption({
+      value: userCourseTracked.courseType,
+      label: userCourseTracked.courseType,
+    });
     handleModal();
   };
 
@@ -90,7 +112,15 @@ const MyCourses = () => {
         className="Modal"
         overlayClassName="Overlay"
       >
-        <ModalForm userName={name} loggedTime={time} onClick={handleModal} />
+        <ModalForm
+          userName={name}
+          loggedTime={time}
+          onClick={handleModal}
+          selectCourseOptions={temporalCourseOptions}
+          selectedCourseOption={selectedCourseOption}
+          selectCourseTypeOptions={temporalCourseTypeOptions}
+          selectedCourseTypeOption={selectedCourseTypeOption}
+        />
       </Modal>
     </div>
   );
