@@ -4,6 +4,7 @@ export const GET_ALL_TRACKED_COURSES = 'GET_ALL_TRACKED_COURSES';
 export const GET_COURSES_LIST = 'GET_COURSES_LIST';
 export const GET_COURSES_TYPE_LIST = 'GET_COURSES_TYPE_LIST';
 export const USER_COURSE_TRACK_EDITED = 'USER_COURSE_TRACK_EDITED';
+export const USER_COURSE_TRACK_DELETED = 'USER_COURSE_TRACK_DELETED';
 
 export const getAllTrackedCourses = () => async (dispatch) => {
     try {
@@ -62,6 +63,18 @@ export const editUserCourseTracked = (
     dispatch({
       type: USER_COURSE_TRACK_EDITED,
       successEdit: true,
+    });
+  } catch (_) {
+    //
+  }
+};
+
+export const deleteUserCourseTracked = (userId) => async (dispatch) => {
+  try {
+    await apiCall(`userCoursesTracker/${userId}`, { delete: '' });
+    dispatch({
+      type: USER_COURSE_TRACK_DELETED,
+      successDelete: true,
     });
   } catch (_) {
     //

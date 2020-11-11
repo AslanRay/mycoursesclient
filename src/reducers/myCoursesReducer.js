@@ -3,6 +3,7 @@ import {
   GET_COURSES_LIST,
   GET_COURSES_TYPE_LIST,
   USER_COURSE_TRACK_EDITED,
+  USER_COURSE_TRACK_DELETED,
 } from '../actions/myCoursesAction';
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   coursesList: [],
   courseTypesList: [],
   successEdit: false,
+  successDelete: false,
 };
 
 const myCoursesReducer = (state = initialState, action) => {
@@ -36,6 +38,12 @@ const myCoursesReducer = (state = initialState, action) => {
       return {
         ...state,
         successEdit: action.successEdit,
+      };
+    }
+    case USER_COURSE_TRACK_DELETED: {
+      return {
+        ...state,
+        successDelete: action.successDelete,
       };
     }
     default: return { ...state };

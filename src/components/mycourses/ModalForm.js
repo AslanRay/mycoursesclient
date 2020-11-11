@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import { useSelector, useDispatch } from 'react-redux';
 import './modalForm.css';
-import { editUserCourseTracked } from '../../actions/myCoursesAction';
+import { editUserCourseTracked, deleteUserCourseTracked } from '../../actions/myCoursesAction';
 
 const ModalForm = ({
   userName,
@@ -32,18 +32,19 @@ const ModalForm = ({
     setTime(value);
   };
 
-  console.log('selectedOption', selectedOptionCourse);
-
   const handleEditSubmit = () => {
-    dispatch(
-      editUserCourseTracked(
+    dispatch(editUserCourseTracked(
         userId,
         name,
         selectedCourseOption.value,
         selectedCourseTypeOption.value,
         time,
-      ),
-    );
+      ));
+    onClick();
+  };
+
+  const handleDeleteSubmit = () => {
+    dispatch(deleteUserCourseTracked(userId));
     onClick();
   };
 
@@ -90,7 +91,7 @@ const ModalForm = ({
 
       <div className="Modal_buttons_container">
         <button className="button" type="button" onClick={handleEditSubmit}>Edit</button>
-        <button className="button" type="button">Delete</button>
+        <button className="button" type="button" onClick={handleDeleteSubmit}>Delete</button>
       </div>
     </div>
   );

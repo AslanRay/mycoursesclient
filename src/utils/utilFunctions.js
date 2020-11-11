@@ -55,7 +55,6 @@ export async function apiCall(path, params = {}) {
     options.body = JSON.stringify(params.post);
   } else if (params.delete) {
     options.method = 'DELETE';
-    options.body = JSON.stringify(params.delete);
   } else if (params.patch) {
     options.method = 'PATCH';
     options.body = JSON.stringify(params.patch);

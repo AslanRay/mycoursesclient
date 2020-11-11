@@ -42,8 +42,6 @@ const MyCourses = () => {
 
   const courseTypesList = useSelector((state) => state.myCoursesReducer.courseTypesList);
 
-  console.log('usersCoursesTracked', { usersCoursesTracked, coursesList, courseTypesList });
-
   const temporalCourseOptions = coursesList.map((d) => ({
     value: d.name,
     label: d.name,
@@ -64,7 +62,6 @@ const MyCourses = () => {
   };
 
   const handleTrackedCourseClick = (userCourseTracked) => {
-    console.log('Clicked', userCourseTracked);
     setName(userCourseTracked.userName);
     setTime(userCourseTracked.loggedTime);
     setSelectedCourseOption({

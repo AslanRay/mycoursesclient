@@ -19,14 +19,14 @@
 .Modal_select_input {
   width: 20.8vw;
   height: 5vh;
-  margin-bottom: 5vh;
+  margin-bottom: 3vh;
 }
 
 .Modal_buttons_container {
   display: flex;
   width: 20.8vw;
   justify-content: space-between;
-  margin-top: 2vh;
+  margin-top: 5vh;
 }
 
 .button {
