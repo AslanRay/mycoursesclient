@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Modal from 'react-modal';
 import { logout as signout } from '../../actions/authAction';
-import { getAllTrackedCourses } from '../../actions/myCoursesAction';
+import { getAllTrackedCourses, getCoursesList, getCoursesTypeList } from '../../actions/myCoursesAction';
 import './myCourses.css';
 import TrackedCourseItem from './TrackedCourseItem';
 import ModalForm from './ModalForm';
@@ -22,10 +22,23 @@ const MyCourses = () => {
     dispatch(getAllTrackedCourses());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getCoursesList());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getCoursesTypeList());
+  }, [dispatch]);
+
   const usersCoursesTracked = useSelector(
     (state) => state.myCoursesReducer.usersCoursesTracked,
   );
-  console.log('usersCoursesTracked', usersCoursesTracked);
+
+  const coursesList = useSelector((state) => state.myCoursesReducer.coursesList);
+
+  const courseTypesList = useSelector((state) => state.myCoursesReducer.courseTypesList);
+
+  console.log('usersCoursesTracked', { usersCoursesTracked, coursesList, courseTypesList });
 
   const logout = () => {
     dispatch(signout());
