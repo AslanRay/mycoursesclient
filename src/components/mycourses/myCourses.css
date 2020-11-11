@@ -38,3 +38,23 @@
   flex-direction: column;
   align-items: center;
 }
+
+.Modal {
+  background-color: #F3F4F3;
+  border-radius: 1vw;
+  bottom: 15vh;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 1);
+  left: 37vw;
+  position: absolute;
+  right: 37vw;
+  top: 20vh;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}

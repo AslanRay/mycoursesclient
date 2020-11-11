@@ -1,14 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Modal from 'react-modal';
 import { logout as signout } from '../../actions/authAction';
 import { getAllTrackedCourses } from '../../actions/myCoursesAction';
 import './myCourses.css';
 import TrackedCourseItem from './TrackedCourseItem';
+import ModalForm from './ModalForm';
 
 const MyCourses = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [name, setName] = useState('');
+  const [time, setTime] = useState('');
 
   const userName = useSelector((state) => state.authReducer.userName);
   // const userId = useSelector((state) => state.authReducer.userID);
@@ -27,7 +32,16 @@ const MyCourses = () => {
     history.push('/');
   };
 
-  const handleTrackedCourseClick = (userCourseTracked) => { console.log('Clicked', userCourseTracked); };
+  const handleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const handleTrackedCourseClick = (userCourseTracked) => {
+    console.log('Clicked', userCourseTracked);
+    setName(userCourseTracked.userName);
+    setTime(userCourseTracked.loggedTime);
+    handleModal();
+  };
 
   return (
     <div className="MyCourses-container">
@@ -48,6 +62,7 @@ const MyCourses = () => {
         <h4>All Tracked Courses List</h4>
         {usersCoursesTracked.map((userCourseTracked) => (
           <TrackedCourseItem
+            key={userCourseTracked.id}
             userName={userCourseTracked.userName}
             courseName={userCourseTracked.courseName}
             courseType={userCourseTracked.courseType}
@@ -56,6 +71,14 @@ const MyCourses = () => {
           />
         ))}
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        className="Modal"
+        overlayClassName="Overlay"
+      >
+        <ModalForm userName={name} loggedTime={time} onClick={handleModal} />
+      </Modal>
     </div>
   );
 };
