@@ -1,9 +1,15 @@
-import { GET_ALL_TRACKED_COURSES, GET_COURSES_LIST, GET_COURSES_TYPE_LIST } from '../actions/myCoursesAction';
+import {
+  GET_ALL_TRACKED_COURSES,
+  GET_COURSES_LIST,
+  GET_COURSES_TYPE_LIST,
+  USER_COURSE_TRACK_EDITED,
+} from '../actions/myCoursesAction';
 
 const initialState = {
   usersCoursesTracked: [],
   coursesList: [],
   courseTypesList: [],
+  successEdit: false,
 };
 
 const myCoursesReducer = (state = initialState, action) => {
@@ -24,6 +30,12 @@ const myCoursesReducer = (state = initialState, action) => {
       return {
         ...state,
         courseTypesList: action.courseTypesList,
+      };
+    }
+    case USER_COURSE_TRACK_EDITED: {
+      return {
+        ...state,
+        successEdit: action.successEdit,
       };
     }
     default: return { ...state };

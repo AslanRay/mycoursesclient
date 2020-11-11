@@ -21,3 +21,23 @@
   height: 5vh;
   margin-bottom: 5vh;
 }
+
+.Modal_buttons_container {
+  display: flex;
+  width: 20.8vw;
+  justify-content: space-between;
+  margin-top: 2vh;
+}
+
+.button {
+  background-color: #3135A8;
+  border: none;
+  border-radius: 0.5vw;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}

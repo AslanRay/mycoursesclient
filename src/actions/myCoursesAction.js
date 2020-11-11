@@ -3,6 +3,7 @@ import { apiCall } from '../utils/utilFunctions';
 export const GET_ALL_TRACKED_COURSES = 'GET_ALL_TRACKED_COURSES';
 export const GET_COURSES_LIST = 'GET_COURSES_LIST';
 export const GET_COURSES_TYPE_LIST = 'GET_COURSES_TYPE_LIST';
+export const USER_COURSE_TRACK_EDITED = 'USER_COURSE_TRACK_EDITED';
 
 export const getAllTrackedCourses = () => async (dispatch) => {
     try {
@@ -37,6 +38,30 @@ export const getCoursesTypeList = () => async (dispatch) => {
     dispatch({
       type: GET_COURSES_TYPE_LIST,
       courseTypesList: data.data,
+    });
+  } catch (_) {
+    //
+  }
+};
+
+export const editUserCourseTracked = (
+  userId,
+  userName,
+  courseName,
+  courseType,
+  loggedTime,
+) => async (dispatch) => {
+  const body = {
+    userName,
+    courseName,
+    courseType,
+    loggedTime,
+  };
+  try {
+    await apiCall(`userCoursesTracker/${userId}`, { patch: body });
+    dispatch({
+      type: USER_COURSE_TRACK_EDITED,
+      successEdit: true,
     });
   } catch (_) {
     //

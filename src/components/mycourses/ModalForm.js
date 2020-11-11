@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
+import { useSelector, useDispatch } from 'react-redux';
 import './modalForm.css';
+import { editUserCourseTracked } from '../../actions/myCoursesAction';
 
 const ModalForm = ({
   userName,
@@ -17,6 +19,8 @@ const ModalForm = ({
   const [selectedOptionCourseType, setSelectedOptionCourseType] = useState(
     selectedCourseTypeOption,
   );
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.authReducer.userID);
 
   const handleSetName = (event) => {
     const { value } = event.target;
@@ -29,6 +33,19 @@ const ModalForm = ({
   };
 
   console.log('selectedOption', selectedOptionCourse);
+
+  const handleEditSubmit = () => {
+    dispatch(
+      editUserCourseTracked(
+        userId,
+        name,
+        selectedCourseOption.value,
+        selectedCourseTypeOption.value,
+        time,
+      ),
+    );
+    onClick();
+  };
 
   return (
     <div className="Modal_form_container">
@@ -70,6 +87,11 @@ const ModalForm = ({
         type="text"
         value={time}
       />
+
+      <div className="Modal_buttons_container">
+        <button className="button" type="button" onClick={handleEditSubmit}>Edit</button>
+        <button className="button" type="button">Delete</button>
+      </div>
     </div>
   );
 };
