@@ -17,11 +17,14 @@ const MyCourses = () => {
   const [time, setTime] = useState('');
   const [selectedCourseOption, setSelectedCourseOption] = useState(null);
   const [selectedCourseTypeOption, setSelectedCourseTypeOption] = useState(null);
-  // const [courseOptions, setCourseOptions] = useState([]);
-  // const [courseTypeOptions, setCourseTypeOptions] = useState([]);
+  const [usersCoursesTrackedFiltered, setUsersCoursesTracked] = useState(null);
+  const [searchInput, setSearchInput] = useState('');
 
   const userName = useSelector((state) => state.authReducer.userName);
-  // const userId = useSelector((state) => state.authReducer.userID);
+
+  const usersCoursesTracked = useSelector(
+    (state) => state.myCoursesReducer.usersCoursesTracked,
+  );
 
   useEffect(() => {
     dispatch(getAllTrackedCourses());
@@ -34,10 +37,6 @@ const MyCourses = () => {
   useEffect(() => {
     dispatch(getCoursesTypeList());
   }, [dispatch]);
-
-  const usersCoursesTracked = useSelector(
-    (state) => state.myCoursesReducer.usersCoursesTracked,
-  );
 
   const coursesList = useSelector((state) => state.myCoursesReducer.coursesList);
 
@@ -76,6 +75,42 @@ const MyCourses = () => {
     handleModal();
   };
 
+  const handleSearchFilter = (event) => {
+    const { value } = event.target;
+    setSearchInput(value);
+    const filteredData = usersCoursesTracked.filter((userCourseTracked) => userCourseTracked
+      .userName
+      .toLowerCase()
+      .startsWith(value.toLowerCase())
+      || userCourseTracked.courseName.toLowerCase().startsWith(value.toLowerCase()));
+    setUsersCoursesTracked(filteredData);
+  };
+
+  const renderTrackedCourseList = () => {
+    if (usersCoursesTrackedFiltered && usersCoursesTrackedFiltered.length > 0) {
+      return usersCoursesTrackedFiltered.map((userCourseTracked) => (
+        <TrackedCourseItem
+          key={userCourseTracked.id}
+          userName={userCourseTracked.userName}
+          courseName={userCourseTracked.courseName}
+          courseType={userCourseTracked.courseType}
+          loggedTime={userCourseTracked.loggedTime}
+          onClick={() => handleTrackedCourseClick(userCourseTracked)}
+        />
+      ));
+    }
+     return usersCoursesTracked.map((userCourseTracked) => (
+       <TrackedCourseItem
+         key={userCourseTracked.id}
+         userName={userCourseTracked.userName}
+         courseName={userCourseTracked.courseName}
+         courseType={userCourseTracked.courseType}
+         loggedTime={userCourseTracked.loggedTime}
+         onClick={() => handleTrackedCourseClick(userCourseTracked)}
+       />
+    ));
+  };
+
   return (
     <div className="MyCourses-container">
       <div className="MyCourses-title-row">
@@ -99,16 +134,16 @@ const MyCourses = () => {
 
       <div className="MyCourses-tracked-courses-list">
         <h4>All Tracked Courses List</h4>
-        {usersCoursesTracked.map((userCourseTracked) => (
-          <TrackedCourseItem
-            key={userCourseTracked.id}
-            userName={userCourseTracked.userName}
-            courseName={userCourseTracked.courseName}
-            courseType={userCourseTracked.courseType}
-            loggedTime={userCourseTracked.loggedTime}
-            onClick={() => handleTrackedCourseClick(userCourseTracked)}
-          />
-        ))}
+
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchInput}
+          onChange={handleSearchFilter}
+          className="Input-container"
+        />
+
+        {renderTrackedCourseList()}
       </div>
 
       <Modal

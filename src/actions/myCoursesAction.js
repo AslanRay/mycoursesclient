@@ -64,6 +64,7 @@ export const saveUserTrackedCourse = (
       type: SAVE_USER_TRACKED_COURSE,
       successSave: true,
     });
+    getAllTrackedCourses()(dispatch);
   } catch (_) {
     //
   }
@@ -95,7 +96,7 @@ export const editUserCourseTracked = (
 
 export const deleteUserCourseTracked = (userId) => async (dispatch) => {
   try {
-    await apiCall(`userCoursesTracker/${userId}`, { delete: '' });
+    await apiCall(`userCoursesTracker/${userId}`, { delete: {} });
     dispatch({
       type: USER_COURSE_TRACK_DELETED,
       successDelete: true,

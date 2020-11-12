@@ -7,9 +7,10 @@
   cursor: pointer;
   padding: 1vw;
   margin: 1vw;
+  background-color: #3135A8;
 }
 
 .TCI_item {
-  color: #282828;
+  color: #F3F4F3;
   margin-bottom: 1vh;
 }

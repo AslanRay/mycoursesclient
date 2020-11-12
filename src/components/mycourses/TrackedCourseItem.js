@@ -9,7 +9,7 @@ const TrackedCourseItem = ({
     className="TCI_container"
     onClick={onClick}
     role="button"
-    onKeyDown={onClick}
+    onKeyDown={() => {}}
     tabIndex={0}
   >
     <span className="TCI_item">{`User: ${userName}`}</span>

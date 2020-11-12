@@ -50,7 +50,7 @@ const CreateTrackedCourse = ({
         <input
           className="Logged_time_input"
           onChange={handleSetTime}
-          placeholder="Logged time in format 1d 1h"
+          placeholder="Logged time. Format example 1d 1h"
           type="text"
           value={time}
         />
