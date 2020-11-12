@@ -6,6 +6,7 @@ import { logout as signout } from '../../actions/authAction';
 import { getAllTrackedCourses, getCoursesList, getCoursesTypeList } from '../../actions/myCoursesAction';
 import './myCourses.css';
 import TrackedCourseItem from './TrackedCourseItem';
+import CreateTrackedCourse from './CreateTrackedCourse';
 import ModalForm from './ModalForm';
 
 const MyCourses = () => {
@@ -89,6 +90,8 @@ const MyCourses = () => {
           tabIndex={0}
         />
       </div>
+
+      <CreateTrackedCourse />
 
       <div className="MyCourses-tracked-courses-list">
         <h4>All Tracked Courses List</h4>

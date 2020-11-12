@@ -1,0 +1,22 @@
+.CTC_container {
+  display: flex;
+  background-color: #4D85E4;
+  width: 100vw;
+  height: 20vh;
+  margin-top: 8vh;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.Logged_time_input {
+  width: 20vw;
+  height: 5vh;
+  margin-bottom: 2vh;
+  border-radius: 0.5vw;
+  color: #282828;
+}
+
+.CTC_select_input {
+  width: 20.8vw;
+  height: 5vh;
+}
