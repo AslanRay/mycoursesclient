@@ -92,7 +92,7 @@ const MyCourses = () => {
       </div>
 
       <CreateTrackedCourse
-        userName={name}
+        userName={userName}
         selectCourseOptions={temporalCourseOptions}
         selectCourseTypeOptions={temporalCourseTypeOptions}
       />

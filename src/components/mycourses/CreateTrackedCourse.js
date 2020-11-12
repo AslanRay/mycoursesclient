@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
+import { useDispatch } from 'react-redux';
+import { saveUserTrackedCourse } from '../../actions/myCoursesAction';
 import './createTrackedCourse.css';
 
 const CreateTrackedCourse = ({
@@ -7,7 +9,7 @@ const CreateTrackedCourse = ({
   selectCourseOptions,
   selectCourseTypeOptions,
 }) => {
-  console.log('userName', userName);
+  const dispatch = useDispatch();
   const [time, setTime] = useState('');
   const [selectedOptionCourse, setSelectedOptionCourse] = useState(null);
   const [selectedOptionCourseType, setSelectedOptionCourseType] = useState(null);
@@ -15,6 +17,15 @@ const CreateTrackedCourse = ({
   const handleSetTime = (event) => {
     const { value } = event.target;
     setTime(value);
+  };
+
+  const handleSave = () => {
+    dispatch(saveUserTrackedCourse(
+      userName, selectedOptionCourse.value, selectedOptionCourseType.value, time,
+    ));
+    setTime('');
+    setSelectedOptionCourse(null);
+    setSelectedOptionCourseType(null);
   };
 
   return (
@@ -44,7 +55,7 @@ const CreateTrackedCourse = ({
           value={time}
         />
 
-        <button type="button" className="button Register_button">Save</button>
+        <button type="button" className="button Register_button" onClick={handleSave}>Save</button>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ export const GET_COURSES_LIST = 'GET_COURSES_LIST';
 export const GET_COURSES_TYPE_LIST = 'GET_COURSES_TYPE_LIST';
 export const USER_COURSE_TRACK_EDITED = 'USER_COURSE_TRACK_EDITED';
 export const USER_COURSE_TRACK_DELETED = 'USER_COURSE_TRACK_DELETED';
+export const SAVE_USER_TRACKED_COURSE = 'SAVE_USER_TRACKED_COURSE';
 
 export const getAllTrackedCourses = () => async (dispatch) => {
     try {
@@ -39,6 +40,29 @@ export const getCoursesTypeList = () => async (dispatch) => {
     dispatch({
       type: GET_COURSES_TYPE_LIST,
       courseTypesList: data.data,
+    });
+  } catch (_) {
+    //
+  }
+};
+
+export const saveUserTrackedCourse = (
+  userName,
+  courseName,
+  courseType,
+  loggedTime,
+) => async (dispatch) => {
+  const body = {
+    userName,
+    courseName,
+    courseType,
+    loggedTime,
+  };
+  try {
+    await apiCall('userCoursesTracker', { post: body });
+    dispatch({
+      type: SAVE_USER_TRACKED_COURSE,
+      successSave: true,
     });
   } catch (_) {
     //
