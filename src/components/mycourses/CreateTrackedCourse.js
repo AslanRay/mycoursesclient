@@ -19,29 +19,33 @@ const CreateTrackedCourse = ({
 
   return (
     <div className="CTC_container">
-      <Select
-        options={selectCourseOptions}
-        value={selectedOptionCourse}
-        onChange={setSelectedOptionCourse}
-        className="CTC_select_input"
-      />
+      <h2 className="CTC_track_a_new_text">Track a new course</h2>
 
-      <Select
-        options={selectCourseTypeOptions}
-        value={selectedOptionCourseType}
-        onChange={setSelectedOptionCourseType}
-        className="CTC_select_input"
-      />
+      <div className="CTC_form">
+        <Select
+          options={selectCourseOptions}
+          value={selectedOptionCourse}
+          onChange={setSelectedOptionCourse}
+          className="CTC_select_input"
+        />
 
-      <input
-        className="Logged_time_input"
-        onChange={handleSetTime}
-        placeholder="Logged time in format 1d 1h"
-        type="text"
-        value={time}
-      />
+        <Select
+          options={selectCourseTypeOptions}
+          value={selectedOptionCourseType}
+          onChange={setSelectedOptionCourseType}
+          className="CTC_select_input"
+        />
 
-      <button type="button">Register</button>
+        <input
+          className="Logged_time_input"
+          onChange={handleSetTime}
+          placeholder="Logged time in format 1d 1h"
+          type="text"
+          value={time}
+        />
+
+        <button type="button" className="button Register_button">Save</button>
+      </div>
     </div>
   );
 };

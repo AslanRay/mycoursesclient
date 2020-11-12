@@ -91,7 +91,11 @@ const MyCourses = () => {
         />
       </div>
 
-      <CreateTrackedCourse />
+      <CreateTrackedCourse
+        userName={name}
+        selectCourseOptions={temporalCourseOptions}
+        selectCourseTypeOptions={temporalCourseTypeOptions}
+      />
 
       <div className="MyCourses-tracked-courses-list">
         <h4>All Tracked Courses List</h4>
