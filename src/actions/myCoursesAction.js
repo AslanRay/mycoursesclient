@@ -89,6 +89,7 @@ export const editUserCourseTracked = (
       type: USER_COURSE_TRACK_EDITED,
       successEdit: true,
     });
+    getAllTrackedCourses()(dispatch);
   } catch (_) {
     //
   }
@@ -101,6 +102,7 @@ export const deleteUserCourseTracked = (userId) => async (dispatch) => {
       type: USER_COURSE_TRACK_DELETED,
       successDelete: true,
     });
+    getAllTrackedCourses()(dispatch);
   } catch (_) {
     //
   }

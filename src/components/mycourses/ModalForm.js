@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import './modalForm.css';
 import { editUserCourseTracked, deleteUserCourseTracked } from '../../actions/myCoursesAction';
 
@@ -12,6 +12,7 @@ const ModalForm = ({
   selectCourseTypeOptions,
   selectedCourseOption,
   selectedCourseTypeOption,
+  userCourseTrackedID,
 }) => {
   const [name, setName] = useState(userName);
   const [time, setTime] = useState(loggedTime);
@@ -20,7 +21,6 @@ const ModalForm = ({
     selectedCourseTypeOption,
   );
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.authReducer.userID);
 
   const handleSetName = (event) => {
     const { value } = event.target;
@@ -34,7 +34,7 @@ const ModalForm = ({
 
   const handleEditSubmit = () => {
     dispatch(editUserCourseTracked(
-        userId,
+        userCourseTrackedID,
         name,
         selectedCourseOption.value,
         selectedCourseTypeOption.value,
@@ -44,7 +44,7 @@ const ModalForm = ({
   };
 
   const handleDeleteSubmit = () => {
-    dispatch(deleteUserCourseTracked(userId));
+    dispatch(deleteUserCourseTracked(userCourseTrackedID));
     onClick();
   };
 

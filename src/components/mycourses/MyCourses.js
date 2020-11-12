@@ -15,6 +15,7 @@ const MyCourses = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState('');
   const [time, setTime] = useState('');
+  const [userCourseTrackedID, setUserCourseTrackedID] = useState(null);
   const [selectedCourseOption, setSelectedCourseOption] = useState(null);
   const [selectedCourseTypeOption, setSelectedCourseTypeOption] = useState(null);
   const [usersCoursesTrackedFiltered, setUsersCoursesTracked] = useState(null);
@@ -23,7 +24,7 @@ const MyCourses = () => {
   const userName = useSelector((state) => state.authReducer.userName);
 
   const usersCoursesTracked = useSelector(
-    (state) => state.myCoursesReducer.usersCoursesTracked,
+    (state) => state.myCoursesReducer.usersCoursesTracked.reverse(),
   );
 
   useEffect(() => {
@@ -72,6 +73,7 @@ const MyCourses = () => {
       value: userCourseTracked.courseType,
       label: userCourseTracked.courseType,
     });
+    setUserCourseTrackedID(userCourseTracked.id);
     handleModal();
   };
 
@@ -159,6 +161,7 @@ const MyCourses = () => {
           selectedCourseOption={selectedCourseOption}
           selectCourseTypeOptions={temporalCourseTypeOptions}
           selectedCourseTypeOption={selectedCourseTypeOption}
+          userCourseTrackedID={userCourseTrackedID}
         />
       </Modal>
     </div>
