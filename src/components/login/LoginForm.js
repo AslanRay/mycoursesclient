@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../actions/authAction';
 import './loginForm.css';
 import LoginButton from '../common/loginButton/LoginButton';
+import LoginButtonDisabled from '../common/loginButtonDisabled/LoginButtonDisabled';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isFormValid, setIsFormValid] = useState(false);
   const dispath = useDispatch();
 
   const handleEmailText = (event) => {
@@ -23,6 +25,14 @@ function LoginForm() {
     event.preventDefault();
     dispath(login(email, password));
   };
+
+  useEffect(() => {
+    if (email.length > 0 && password.length > 0) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [email.length, password.length]);
 
   return (
     <div>
@@ -43,7 +53,7 @@ function LoginForm() {
           value={password}
         />
 
-        <LoginButton />
+        {isFormValid ? <LoginButton /> : <LoginButtonDisabled />}
       </form>
     </div>
   );

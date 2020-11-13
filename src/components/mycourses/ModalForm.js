@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import './modalForm.css';
 import { editUserCourseTracked, deleteUserCourseTracked } from '../../actions/myCoursesAction';
+import EditRegisterButton from '../common/editRegisterButton/EditRegisterButton';
+import EditRegisterButtonDisabled from '../common/editRegisterButtonDisabled/EditRegisterButtonDisabled';
 
 const ModalForm = ({
   userName,
@@ -15,18 +17,19 @@ const ModalForm = ({
   selectedCourseTypeOption,
   userCourseTrackedID,
 }) => {
-  const [name, setName] = useState(userName);
+  // const [name, setName] = useState(userName);
   const [time, setTime] = useState(loggedTime);
   const [selectedOptionCourse, setSelectedOptionCourse] = useState(selectedCourseOption);
   const [selectedOptionCourseType, setSelectedOptionCourseType] = useState(
     selectedCourseTypeOption,
   );
+  const [isFormValid, setIsFormValid] = useState(false);
   const dispatch = useDispatch();
 
-  const handleSetName = (event) => {
-    const { value } = event.target;
-    setName(value);
-  };
+  // const handleSetName = (event) => {
+  //   const { value } = event.target;
+  //   setName(value);
+  // };
 
   const handleSetTime = (event) => {
     const { value } = event.target;
@@ -36,7 +39,7 @@ const ModalForm = ({
   const handleEditSubmit = () => {
     dispatch(editUserCourseTracked(
         userCourseTrackedID,
-        name,
+        userName,
         selectedCourseOption.value,
         selectedCourseTypeOption.value,
         time,
@@ -45,6 +48,7 @@ const ModalForm = ({
   };
 
   const handleEditAlert = () => {
+    onClick();
     Swal.fire({
       title: 'Confirm your edits',
       text: "You're about to edit your selected register",
@@ -72,6 +76,7 @@ const ModalForm = ({
   };
 
   const handleDeleteAlert = () => {
+    onClick();
     Swal.fire({
       title: 'Are you sure?',
       text: "You can't undo this action after confirm deleting",
@@ -93,6 +98,14 @@ const ModalForm = ({
     });
   };
 
+  useEffect(() => {
+    if (time.length > 0 && selectedOptionCourse && selectedOptionCourseType) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [time.length, selectedOptionCourse, selectedOptionCourseType]);
+
   return (
     <div className="Modal_form_container">
       <div
@@ -104,13 +117,13 @@ const ModalForm = ({
         tabIndex={0}
       />
 
-      <input
+      {/* <input
         className="Input-container"
         onChange={handleSetName}
         placeholder="User name"
         type="text"
         value={name}
-      />
+      /> */}
 
       <Select
         options={selectCourseOptions}
@@ -129,14 +142,20 @@ const ModalForm = ({
       <input
         className="Input-container"
         onChange={handleSetTime}
-        placeholder="Logged time"
+        placeholder="Logged time. Format example 1d 1h"
         type="text"
         value={time}
       />
 
       <div className="Modal_buttons_container">
-        <button className="button" type="button" onClick={handleEditAlert}>Edit</button>
-        <button className="button" type="button" onClick={handleDeleteAlert}>Delete</button>
+        {isFormValid ? (
+          <EditRegisterButton handleEditAlert={handleEditAlert} />
+        ) : (
+          <EditRegisterButtonDisabled />
+        )}
+        <button className="button" type="button" onClick={handleDeleteAlert}>
+          Delete
+        </button>
       </div>
     </div>
   );

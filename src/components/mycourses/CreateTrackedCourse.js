@@ -1,61 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
-// import { useDispatch } from 'react-redux';
-// import Swal from 'sweetalert2';
-// import { saveUserTrackedCourse } from '../../actions/myCoursesAction';
-// import SaveRegisterButton from '../common/saveRegisterButton/SaveRegisterButton';
+import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
+import { saveUserTrackedCourse } from '../../actions/myCoursesAction';
+import SaveRegisterButton from '../common/saveRegisterButton/SaveRegisterButton';
 import SaveRegisterButtonDisabled from '../common/saveRegisterButtonDisabled/SaveRegisterButtonDisabled';
 import './createTrackedCourse.css';
 
 const CreateTrackedCourse = ({
-  // userName,
+  userName,
   selectCourseOptions,
   selectCourseTypeOptions,
 }) => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [time, setTime] = useState('');
   const [selectedOptionCourse, setSelectedOptionCourse] = useState(null);
   const [selectedOptionCourseType, setSelectedOptionCourseType] = useState(null);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const handleSetTime = (event) => {
     const { value } = event.target;
     setTime(value);
   };
 
-  // const clearForm = () => {
-  //   setTime('');
-  //   setSelectedOptionCourse(null);
-  //   setSelectedOptionCourseType(null);
-  // };
+  const clearForm = () => {
+    setTime('');
+    setSelectedOptionCourse(null);
+    setSelectedOptionCourseType(null);
+  };
 
-  // const handleSave = () => {
-  //   dispatch(saveUserTrackedCourse(
-  //     userName, selectedOptionCourse.value, selectedOptionCourseType.value, time,
-  //   ));
-  //   clearForm();
-  // };
+  const handleSave = () => {
+    dispatch(saveUserTrackedCourse(
+      userName, selectedOptionCourse.value, selectedOptionCourseType.value, time,
+    ));
+    clearForm();
+  };
 
-  // const handleConfirmAlert = () => {
-  //   Swal.fire({
-  //     title: 'Confirm your register',
-  //     text: "You're about to create a new tracked course",
-  //     icon: 'info',
-  //     confirmButtonColor: '#3085d6',
-  //     confirmButtonText: 'Yes, continue!',
-  //     showCloseButton: true,
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       handleSave();
-  //       Swal.fire(
-  //         'Created!',
-  //         'Register successfully done',
-  //         'success',
-  //       );
-  //     } else if (result.isDismissed) {
-  //       clearForm();
-  //     }
-  //   });
-  // };
+  const handleConfirmAlert = () => {
+    Swal.fire({
+      title: 'Confirm your register',
+      text: "You're about to create a new tracked course",
+      icon: 'info',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, continue!',
+      showCloseButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleSave();
+        Swal.fire(
+          'Created!',
+          'Register successfully done',
+          'success',
+        );
+      } else if (result.isDismissed) {
+        clearForm();
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (time.length > 0 && selectedOptionCourse && selectedOptionCourseType) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [time.length, selectedOptionCourse, selectedOptionCourseType]);
 
   return (
     <div className="CTC_container">
@@ -84,8 +93,11 @@ const CreateTrackedCourse = ({
           value={time}
         />
 
-        {/* <SaveRegisterButton handleConfirmAlert={handleConfirmAlert} /> */}
-        <SaveRegisterButtonDisabled />
+        {isFormValid ? (
+          <SaveRegisterButton handleConfirmAlert={handleConfirmAlert} />
+        ) : (
+          <SaveRegisterButtonDisabled />
+        )}
       </div>
     </div>
   );
