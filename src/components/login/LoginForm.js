@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../actions/authAction';
 import './loginForm.css';
+import LoginButton from '../common/loginButton/LoginButton';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
@@ -33,6 +34,7 @@ function LoginForm() {
           type="text"
           value={email}
         />
+
         <input
           className="Input-container"
           onChange={handlePasswordText}
@@ -40,7 +42,8 @@ function LoginForm() {
           type="password"
           value={password}
         />
-        <button className="Button-container" type="submit">Log In</button>
+
+        <LoginButton />
       </form>
     </div>
   );
