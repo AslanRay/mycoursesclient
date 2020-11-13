@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 import './modalForm.css';
 import { editUserCourseTracked, deleteUserCourseTracked } from '../../actions/myCoursesAction';
 
@@ -43,9 +44,53 @@ const ModalForm = ({
     onClick();
   };
 
+  const handleEditAlert = () => {
+    Swal.fire({
+      title: 'Confirm your edits',
+      text: "You're about to edit your selected register",
+      icon: 'info',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, continue!',
+      showCloseButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleEditSubmit();
+        Swal.fire(
+          'Edited!',
+          'Edit successfully done',
+          'success',
+        );
+      } else if (result.isDismissed) {
+        onClick();
+      }
+    });
+  };
+
   const handleDeleteSubmit = () => {
     dispatch(deleteUserCourseTracked(userCourseTrackedID));
     onClick();
+  };
+
+  const handleDeleteAlert = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You can't undo this action after confirm deleting",
+      icon: 'question',
+      confirmButtonColor: '#FF0000',
+      confirmButtonText: 'Yes, continue!',
+      showCloseButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDeleteSubmit();
+        Swal.fire(
+          'Deleted!',
+          'Delete successfully done',
+          'success',
+        );
+      } else if (result.isDismissed) {
+        onClick();
+      }
+    });
   };
 
   return (
@@ -90,8 +135,8 @@ const ModalForm = ({
       />
 
       <div className="Modal_buttons_container">
-        <button className="button" type="button" onClick={handleEditSubmit}>Edit</button>
-        <button className="button" type="button" onClick={handleDeleteSubmit}>Delete</button>
+        <button className="button" type="button" onClick={handleEditAlert}>Edit</button>
+        <button className="button" type="button" onClick={handleDeleteAlert}>Delete</button>
       </div>
     </div>
   );

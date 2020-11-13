@@ -71,7 +71,7 @@ export const saveUserTrackedCourse = (
 };
 
 export const editUserCourseTracked = (
-  userId,
+  userCourseTrackedID,
   userName,
   courseName,
   courseType,
@@ -84,7 +84,7 @@ export const editUserCourseTracked = (
     loggedTime,
   };
   try {
-    await apiCall(`userCoursesTracker/${userId}`, { patch: body });
+    await apiCall(`userCoursesTracker/${userCourseTrackedID}`, { patch: body });
     dispatch({
       type: USER_COURSE_TRACK_EDITED,
       successEdit: true,
@@ -95,9 +95,9 @@ export const editUserCourseTracked = (
   }
 };
 
-export const deleteUserCourseTracked = (userId) => async (dispatch) => {
+export const deleteUserCourseTracked = (userCourseTrackedID) => async (dispatch) => {
   try {
-    await apiCall(`userCoursesTracker/${userId}`, { delete: {} });
+    await apiCall(`userCoursesTracker/${userCourseTrackedID}`, { delete: {} });
     dispatch({
       type: USER_COURSE_TRACK_DELETED,
       successDelete: true,

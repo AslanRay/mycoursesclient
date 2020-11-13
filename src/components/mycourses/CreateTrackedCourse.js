@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 import { saveUserTrackedCourse } from '../../actions/myCoursesAction';
 import './createTrackedCourse.css';
 
@@ -19,13 +20,39 @@ const CreateTrackedCourse = ({
     setTime(value);
   };
 
+  const clearForm = () => {
+    setTime('');
+    setSelectedOptionCourse(null);
+    setSelectedOptionCourseType(null);
+  };
+
   const handleSave = () => {
     dispatch(saveUserTrackedCourse(
       userName, selectedOptionCourse.value, selectedOptionCourseType.value, time,
     ));
-    setTime('');
-    setSelectedOptionCourse(null);
-    setSelectedOptionCourseType(null);
+    clearForm();
+  };
+
+  const handleConfirmAlert = () => {
+    Swal.fire({
+      title: 'Confirm your register',
+      text: "You're about to create a new tracked course",
+      icon: 'info',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, continue!',
+      showCloseButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleSave();
+        Swal.fire(
+          'Created!',
+          'Register successfully done',
+          'success',
+        );
+      } else if (result.isDismissed) {
+        clearForm();
+      }
+    });
   };
 
   return (
@@ -55,7 +82,7 @@ const CreateTrackedCourse = ({
           value={time}
         />
 
-        <button type="button" className="button Register_button" onClick={handleSave}>Save</button>
+        <button type="button" className="button Register_button" onClick={handleConfirmAlert}>Save</button>
       </div>
     </div>
   );
