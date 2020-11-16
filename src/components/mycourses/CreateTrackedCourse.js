@@ -5,6 +5,15 @@ import Swal from 'sweetalert2';
 import { saveUserTrackedCourse } from '../../actions/myCoursesAction';
 import SaveRegisterButton from '../common/saveRegisterButton/SaveRegisterButton';
 import SaveRegisterButtonDisabled from '../common/saveRegisterButtonDisabled/SaveRegisterButtonDisabled';
+import Tooltip from '../common/tooltip/Tooltip';
+import {
+  hoursRegex,
+  daysRegex,
+  weeksRegeX,
+  singleWeeksRegeX,
+  singleDaysRegex,
+  weeksDaysRegeX,
+} from '../../utils/regex';
 import './createTrackedCourse.css';
 
 const CreateTrackedCourse = ({
@@ -59,12 +68,28 @@ const CreateTrackedCourse = ({
   };
 
   useEffect(() => {
-    if (time.length > 0 && selectedOptionCourse && selectedOptionCourseType) {
+    const testWeeks = weeksRegeX.test(time);
+    const testDays = daysRegex.test(time);
+    const testHours = hoursRegex.test(time);
+    const testSingleWeeks = singleWeeksRegeX.test(time);
+    const testSingleDays = singleDaysRegex.test(time);
+    const testWeeksDays = weeksDaysRegeX.test(time);
+    if (
+      time.length > 0
+      && selectedOptionCourse
+      && selectedOptionCourseType
+      && (testWeeks
+        || testDays
+        || testHours
+        || testSingleWeeks
+        || testSingleDays
+        || testWeeksDays)
+    ) {
       setIsFormValid(true);
     } else {
       setIsFormValid(false);
     }
-  }, [time.length, selectedOptionCourse, selectedOptionCourseType]);
+  }, [time, time.length, selectedOptionCourse, selectedOptionCourseType]);
 
   return (
     <div className="CTC_container">
@@ -85,13 +110,15 @@ const CreateTrackedCourse = ({
           className="CTC_select_input"
         />
 
-        <input
-          className="Logged_time_input"
-          onChange={handleSetTime}
-          placeholder="Logged time. Format example 1d 1h"
-          type="text"
-          value={time}
-        />
+        <Tooltip>
+          <input
+            className="Logged_time_input"
+            onChange={handleSetTime}
+            placeholder="Logged time. Format example 1d 1h"
+            type="text"
+            value={time}
+          />
+        </Tooltip>
 
         {isFormValid ? (
           <SaveRegisterButton handleConfirmAlert={handleConfirmAlert} />
