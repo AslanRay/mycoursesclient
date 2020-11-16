@@ -4,6 +4,7 @@ import { login } from '../../actions/authAction';
 import './loginForm.css';
 import LoginButton from '../common/loginButton/LoginButton';
 import LoginButtonDisabled from '../common/loginButtonDisabled/LoginButtonDisabled';
+import { emailRegex } from '../../utils/regex';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
@@ -27,12 +28,13 @@ function LoginForm() {
   };
 
   useEffect(() => {
-    if (email.length > 0 && password.length > 0) {
+    const testEmail = emailRegex.test(email);
+    if (email.length > 0 && testEmail && password.length > 0) {
       setIsFormValid(true);
     } else {
       setIsFormValid(false);
     }
-  }, [email.length, password.length]);
+  }, [email, email.length, password.length]);
 
   return (
     <div>
