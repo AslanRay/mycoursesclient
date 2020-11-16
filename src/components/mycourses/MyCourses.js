@@ -10,6 +10,7 @@ import CreateTrackedCourse from './CreateTrackedCourse';
 import ModalForm from './ModalForm';
 
 const MyCourses = () => {
+  Modal.setAppElement('body');
   const dispatch = useDispatch();
   const history = useHistory();
   const [isModalOpen, setIsModalOpen] = useState(false);
