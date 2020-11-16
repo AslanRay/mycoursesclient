@@ -3,6 +3,7 @@ import {
   Redirect, Route, Switch, withRouter,
 } from 'react-router-dom';
 import LoginForm from '../components/login/LoginForm';
+import AllCourses from '../components/allcourses/AllCourses';
 
 const PublicRouter = (props) => {
   useEffect(() => () => props.history.push('/'), []);
@@ -11,6 +12,10 @@ const PublicRouter = (props) => {
     <Switch>
       <Route exact path="/">
         <LoginForm />
+      </Route>
+
+      <Route exact path="/allcourses">
+        <AllCourses />
       </Route>
 
       <Route path="*">

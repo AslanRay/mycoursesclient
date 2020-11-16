@@ -6,6 +6,14 @@ import './modalForm.css';
 import { editUserCourseTracked, deleteUserCourseTracked } from '../../actions/myCoursesAction';
 import EditRegisterButton from '../common/editRegisterButton/EditRegisterButton';
 import EditRegisterButtonDisabled from '../common/editRegisterButtonDisabled/EditRegisterButtonDisabled';
+import {
+  daysRegex,
+  hoursRegex,
+  singleDaysRegex,
+  singleWeeksRegeX,
+  weeksDaysRegeX,
+  weeksRegeX,
+} from '../../utils/regex';
 
 const ModalForm = ({
   userName,
@@ -99,12 +107,28 @@ const ModalForm = ({
   };
 
   useEffect(() => {
-    if (time.length > 0 && selectedOptionCourse && selectedOptionCourseType) {
+    const testWeeks = weeksRegeX.test(time);
+    const testDays = daysRegex.test(time);
+    const testHours = hoursRegex.test(time);
+    const testSingleWeeks = singleWeeksRegeX.test(time);
+    const testSingleDays = singleDaysRegex.test(time);
+    const testWeeksDays = weeksDaysRegeX.test(time);
+    if (
+      time.length > 0
+      && selectedOptionCourse
+      && selectedOptionCourseType
+      && (testWeeks
+        || testDays
+        || testHours
+        || testSingleWeeks
+        || testSingleDays
+        || testWeeksDays)
+    ) {
       setIsFormValid(true);
     } else {
       setIsFormValid(false);
     }
-  }, [time.length, selectedOptionCourse, selectedOptionCourseType]);
+  }, [time, time.length, selectedOptionCourse, selectedOptionCourseType]);
 
   return (
     <div className="Modal_form_container">

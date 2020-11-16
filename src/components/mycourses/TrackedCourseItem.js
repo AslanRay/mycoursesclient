@@ -2,11 +2,11 @@ import React from 'react';
 import './trackedCourseItem.css';
 
 const TrackedCourseItem = ({
- userName, courseName, courseType, loggedTime, onClick,
+ userName, courseName, courseType, loggedTime, onClick, showOnly,
 }) => (
   <div
     aria-label="trackedcourseitem"
-    className="TCI_container"
+    className={!showOnly ? 'TCI_container' : 'TCI_container_show_only'}
     onClick={onClick}
     role="button"
     onKeyDown={() => {}}

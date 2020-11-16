@@ -13,6 +13,7 @@ const SessionRouter = (props) => {
       <Route exact path="/">
         <RedirectAfterLogin />
       </Route>
+
       <Route exact path="/mycourses">
         <MyCourses />
       </Route>

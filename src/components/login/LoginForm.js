@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { login } from '../../actions/authAction';
 import './loginForm.css';
 import LoginButton from '../common/loginButton/LoginButton';
@@ -11,6 +12,7 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
   const dispath = useDispatch();
+  const history = useHistory();
 
   const handleEmailText = (event) => {
     const { value } = event.target;
@@ -36,6 +38,10 @@ function LoginForm() {
     }
   }, [email, email.length, password.length]);
 
+  const handleGotoAllCourses = () => {
+    history.push('/allcourses');
+  };
+
   return (
     <div>
       <form className="Login-container" onSubmit={handleSubmit}>
@@ -56,6 +62,8 @@ function LoginForm() {
         />
 
         {isFormValid ? <LoginButton /> : <LoginButtonDisabled />}
+
+        <button className="Button-container" type="button" onClick={handleGotoAllCourses}>Show all courses</button>
       </form>
     </div>
   );
