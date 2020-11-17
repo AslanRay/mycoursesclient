@@ -3,6 +3,7 @@
   border-radius: 0.5vw;
   border: none;
   color: white;
+  cursor: not-allowed;
   display: inline-block;
   font-size: 16px;
   margin-bottom: 2vh;

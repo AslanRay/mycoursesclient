@@ -1,11 +1,12 @@
 .Edit_register_button_diabled {
   background-color: #808080;
-  border: none;
   border-radius: 0.5vw;
+  border: none;
   color: white;
+  cursor: not-allowed;
+  display: inline-block;
+  font-size: 16px;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
 }

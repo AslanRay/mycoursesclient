@@ -1,16 +1,16 @@
 .All_courses_container {
-  display: flex;
-  background-color: #AECFEF;
-  flex-direction: column;
   align-items: center;
-  width: 100vw;
+  background-color: #AECFEF;
+  display: flex;
+  flex-direction: column;
   height: 100vh;
+  width: 100vw;
 }
 
 .All_courses_list {
-  width: 100vw;
+  align-items: center;
   background-color: #AECFEF;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 100vw;
 }

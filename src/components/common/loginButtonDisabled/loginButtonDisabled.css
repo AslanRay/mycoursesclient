@@ -1,7 +1,8 @@
 .Login_button_disabled {
-  width: 20.8vw;
-  height: 5vh;
   background-color: #808080;
   border-radius: 0.5vw;
   color: #282828;
+  cursor: not-allowed;
+  height: 5vh;
+  width: 20.8vw;
 }

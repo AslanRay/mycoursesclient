@@ -1,24 +1,24 @@
 .TCI_container {
-  display:flex;
-  flex-direction: column;
-  width: 40vw;
+  background-color: #3135A8;
   border-radius: 1vw;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 1);
   cursor: pointer;
-  padding: 1vw;
+  display:flex;
+  flex-direction: column;
   margin: 1vw;
-  background-color: #3135A8;
+  padding: 1vw;
+  width: 40vw;
 }
 
 .TCI_container_show_only {
-  display:flex;
-  flex-direction: column;
-  width: 40vw;
+  background-color: #3135A8;
   border-radius: 1vw;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 1);
-  padding: 1vw;
+  display:flex;
+  flex-direction: column;
   margin: 1vw;
-  background-color: #3135A8;
+  padding: 1vw;
+  width: 40vw;
 }
 
 .TCI_item {
