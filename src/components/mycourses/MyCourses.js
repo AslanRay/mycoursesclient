@@ -19,7 +19,7 @@ const MyCourses = () => {
   const [userCourseTrackedID, setUserCourseTrackedID] = useState(null);
   const [selectedCourseOption, setSelectedCourseOption] = useState(null);
   const [selectedCourseTypeOption, setSelectedCourseTypeOption] = useState(null);
-  const [usersCoursesTrackedFiltered, setUsersCoursesTracked] = useState(null);
+  const [usersCoursesTrackedFiltered, setUsersCoursesTrackedFiltered] = useState(null);
   const [searchInput, setSearchInput] = useState('');
 
   const userName = useSelector((state) => state.authReducer.userName);
@@ -39,6 +39,12 @@ const MyCourses = () => {
   useEffect(() => {
     dispatch(getCoursesTypeList());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (searchInput.length === 0) {
+      setUsersCoursesTrackedFiltered(null);
+    }
+  }, [searchInput.length]);
 
   const coursesList = useSelector((state) => state.myCoursesReducer.coursesList);
 
@@ -61,6 +67,9 @@ const MyCourses = () => {
 
   const handleModal = () => {
     setIsModalOpen(!isModalOpen);
+    if (!isModalOpen) {
+      setSearchInput('');
+    }
   };
 
   const handleTrackedCourseClick = (userCourseTracked) => {
@@ -86,7 +95,7 @@ const MyCourses = () => {
       .toLowerCase()
       .startsWith(value.toLowerCase())
       || userCourseTracked.courseName.toLowerCase().startsWith(value.toLowerCase()));
-    setUsersCoursesTracked(filteredData);
+      setUsersCoursesTrackedFiltered(filteredData);
   };
 
   const renderTrackedCourseList = () => {
@@ -102,6 +111,7 @@ const MyCourses = () => {
         />
       ));
     }
+
      return usersCoursesTracked.map((userCourseTracked) => (
        <TrackedCourseItem
          key={userCourseTracked.id}

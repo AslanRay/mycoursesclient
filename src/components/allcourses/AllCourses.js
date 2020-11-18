@@ -6,7 +6,7 @@ import './allcourses.css';
 
 const AllCourses = () => {
   const [searchInput, setSearchInput] = useState('');
-  const [usersCoursesTrackedFiltered, setUsersCoursesTracked] = useState(null);
+  const [usersCoursesTrackedFiltered, setUsersCoursesTrackedFiltered] = useState(null);
   const dispatch = useDispatch();
   const usersCoursesTracked = useSelector(
     (state) => state.myCoursesReducer.usersCoursesTracked.reverse(),
@@ -16,6 +16,12 @@ const AllCourses = () => {
     dispatch(getAllTrackedCourses());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (searchInput.length === 0) {
+      setUsersCoursesTrackedFiltered(null);
+    }
+  }, [searchInput.length]);
+
   const handleSearchFilter = (event) => {
     const { value } = event.target;
     setSearchInput(value);
@@ -24,7 +30,7 @@ const AllCourses = () => {
       .toLowerCase()
       .startsWith(value.toLowerCase())
       || userCourseTracked.courseName.toLowerCase().startsWith(value.toLowerCase()));
-    setUsersCoursesTracked(filteredData);
+      setUsersCoursesTrackedFiltered(filteredData);
   };
 
   const renderTrackedCourseList = () => {
