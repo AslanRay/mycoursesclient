@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import TrackedCourseItem from '../mycourses/TrackedCourseItem';
+import { getAllTrackedCourses } from '../../actions/myCoursesAction';
 import './allcourses.css';
 
 const AllCourses = () => {
   const [searchInput, setSearchInput] = useState('');
   const [usersCoursesTrackedFiltered, setUsersCoursesTracked] = useState(null);
+  const dispatch = useDispatch();
   const usersCoursesTracked = useSelector(
     (state) => state.myCoursesReducer.usersCoursesTracked.reverse(),
   );
+
+  useEffect(() => {
+    dispatch(getAllTrackedCourses());
+  }, [dispatch]);
 
   const handleSearchFilter = (event) => {
     const { value } = event.target;
