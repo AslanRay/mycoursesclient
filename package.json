@@ -23,6 +23,7 @@
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
+    "build-docker-client": "docker build -t mycoursesclient:v1 .",
     "start-docker-client": "docker run -p 3000:3000 mycoursesclient:v1"
   },
   "eslintConfig": {
