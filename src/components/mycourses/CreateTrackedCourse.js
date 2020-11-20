@@ -101,6 +101,7 @@ const CreateTrackedCourse = ({
           value={selectedOptionCourse}
           onChange={setSelectedOptionCourse}
           className="CTC_select_input"
+          placeholder="Courses"
         />
 
         <Select
@@ -108,6 +109,7 @@ const CreateTrackedCourse = ({
           value={selectedOptionCourseType}
           onChange={setSelectedOptionCourseType}
           className="CTC_select_input"
+          placeholder="Course types"
         />
 
         <Tooltip>
